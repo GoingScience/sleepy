@@ -119,6 +119,7 @@ class SleepyAPIClient:
         self.secret = secret
         self.proxy = proxy if proxy else None
         self.timeout = 7.5
+        self.client = httpx.AsyncClient(proxy=self.proxy, timeout=self.timeout)
 
     async def _make_request(self, method: str, endpoint: str, **kwargs) -> httpx.Response:
         """发送 HTTP 请求"""
@@ -137,13 +138,12 @@ class SleepyAPIClient:
         kwargs["headers"] = headers
 
         # 发送请求
-        async with httpx.AsyncClient(proxy=self.proxy, timeout=self.timeout) as client:
-            if method.lower() == "get":
-                return await client.get(url, **kwargs)
-            elif method.lower() == "post":
-                return await client.post(url, **kwargs)
-            else:
-                raise ValueError(f"不支持的 HTTP 方法: {method}")
+        if method.lower() == "get":
+            return await self.client.get(url, **kwargs)
+        elif method.lower() == "post":
+            return await self.client.post(url, **kwargs)
+        else:
+            raise ValueError(f"不支持的 HTTP 方法: {method}")
 
     async def set_device_status(
         self,
@@ -196,7 +196,8 @@ class SleepyAPIClient:
 
     async def close(self):
         """关闭客户端，释放资源"""
-        pass
+        if self.client is not None:
+            await self.client.aclose()
 
 # ----- 系统信息获取 -----
 
@@ -331,7 +332,7 @@ def get_window_title() -> str:
 tray_icon = None
 is_running_event = None
 client = None
-main_loop = None
+event_loop = None
 
 
 def on_shutdown(hwnd, msg, wparam, lparam):
@@ -418,9 +419,8 @@ def on_exit(icon, item):
     global tray_icon
     tray_icon = None
     
-    if main_loop is not None and is_running_event is not None:
+    if event_loop is not None and is_running_event is not None:
         is_running_event.clear()
-        main_loop.call_soon_threadsafe(main_loop.stop)
     else:
         import sys
         sys.exit(0)
@@ -597,9 +597,9 @@ async def update_media_status(client: SleepyAPIClient):
 
 async def main_loop():
     """主循环"""
-    global client, main_loop, is_running_event
+    global client, event_loop, is_running_event
     global MINIMIZE_TO_TRAY
-    main_loop = asyncio.get_running_loop()
+    event_loop = asyncio.get_running_loop()
     is_running_event = asyncio.Event()
     is_running_event.set()
     client = SleepyAPIClient(SERVER_URL, SECRET, PROXY)
