@@ -442,7 +442,6 @@ def setup_tray():
     try:
         icon = create_default_icon()
         menu = pystray.Menu(
-            pystray.MenuItem('显示/隐藏日志窗口', toggle_console),
             pystray.MenuItem('退出', on_exit)
         )
         global tray_icon
