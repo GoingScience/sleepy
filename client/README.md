@@ -126,7 +126,7 @@
 > Co-authored-by: [@kmizmal](https://github.com/kmizmal) <br/>
 > Co-authored-by: [@pwnInt](https://github.com/pwnInt) - **^C / 鼠标空闲检测** <br/>
 > Co-authored-by: [@gongfuture](https://github.com/gongfuture) - **媒体信息获取** <br/>
-> Co-authored-by: [@LeiSureLyYrsc](https://github.com/LeiSureLyYrsc) - **异步支持**<br/>
+> Co-authored-by: [@LeiSureLyYrsc](https://github.com/LeiSureLyYrsc) - **异步支持** <br/>
 > Co-authored-by: [@GoingScience](https://github.com/GoingScience) - **托盘启动**
 
 在 Windows 上自动更新设备状态
@@ -169,7 +169,7 @@ pip install pystray Pillow
 
 ```bat
 python win_device.py
-# 显然，托盘版本仅添加到了ds版本中
+:: 显然，托盘功能仅添加到了ds版本中
 python win_device_ds.py
 ```
 
@@ -245,7 +245,8 @@ python win_settings.py
 
 > by: [@wyf9](https://github.com/wyf9) <br/>
 > Co-authored-by: [@VanillaNahida](https://github.com/VanillaNahida) <br/>
-> Co-authored-by: [@makabaka-andy](https://github.com/makabaka-andy)<br/>Co-authored-by: [@GoingScience](https://github.com/GoingScience)
+> Co-authored-by: [@makabaka-andy](https://github.com/makabaka-andy)<br/>
+> Co-authored-by: [@GoingScience](https://github.com/GoingScience)
 
 使用 [Autox.js](https://web.archive.org/web/20241224233444/https://github.com/kkevsekk1/AutoX) 编写的安卓自动更新状态脚本
 
