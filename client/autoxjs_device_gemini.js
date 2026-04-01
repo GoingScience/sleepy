@@ -16,7 +16,7 @@ const API_URL = 'https://api.url/device/set'; // 你的完整 API 地址，以 `
 const SECRET = 'secret'; // 你的 secret
 const ID = 'deviceid'; // 你的设备 id, 唯一
 const SHOW_NAME = 'devicename'; // 你的设备名称, 将显示在网页上
-const CHECK_INTERVAL = '3000'; // 检查间隔 (毫秒, 1000ms=1s)
+const CHECK_INTERVAL = 3000; // 检查间隔 (毫秒, 1000ms=1s)
 const MUSIC_STATUS_FILE = "/sdcard/脚本/音乐播放状态信息.json"; // 音乐状态文件路径，默认脚本所在目录
 const MUSIC_STATUS_TIMEOUT = 5 * 60 * 1000; // 音乐状态未刷新超时时间（5分钟）
 // config end
@@ -65,8 +65,11 @@ function readMusicStatus() {
 }
 
 // 检查音乐状态是否有效
-function isMusicStatusValid() {
-    const musicStatus = readMusicStatus();
+function isMusicStatusValid(musicStatus) {
+    // 允许复用已读取的状态，避免重复 I/O 与 JSON 解析
+    if (!musicStatus) {
+        musicStatus = readMusicStatus();
+    }
     
     if (!musicStatus.isValid) {
         return false;
@@ -126,8 +129,8 @@ function check_status() {
     }
     
     // 检查是否有有效的音乐信息
-    if (isMusicStatusValid() && baseStatus) {
-        const musicStatus = readMusicStatus();
+    const musicStatus = readMusicStatus();
+    if (isMusicStatusValid(musicStatus) && baseStatus) {
         // 组合基础状态和音乐信息
         const finalStatus = baseStatus + `\n【${musicStatus.appName}正在播放】` + '：' + musicStatus.musicTitle;
         log(`[sleepyc] 组合状态: ${finalStatus}`);
