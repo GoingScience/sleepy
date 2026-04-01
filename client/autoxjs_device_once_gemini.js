@@ -16,7 +16,7 @@ var API_URL = 'https://api.url/device/set'; // 你的完整 API 地址，以 `/d
 var SECRET = 'secret'; // 你的 secret
 var ID = 'deviceid'; // 你的设备 id, 唯一,自定义
 var SHOW_NAME = 'devicename'; // 你的设备名称, 将显示在网页上
-var CHECK_INTERVAL = '3000'; // 检查间隔 (毫秒, 1000ms=1s)
+var LAST_STATUS_FILE = "/sdcard/脚本/last_status.txt"; // 上次状态缓存文件路径
 var MUSIC_STATUS_FILE = "/sdcard/脚本/音乐播放状态信息.json"; // 音乐状态文件路径，默认脚本所在目录
 var MUSIC_STATUS_TIMEOUT = 5 * 60 * 1000; // 音乐状态未刷新超时时间（5分钟）
 // config end
