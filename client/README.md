@@ -273,7 +273,7 @@ https://github.com/sleepy-project/sleepy/blob/e6b77af1e4333ad570983b5bf9ac397cb1
 
 ### 清理后台不中断脚本方案
 
-- 导入[autoxjs_device_once_gemini.js](https://github.com/GoingScience/sleepy/blob/main/client/autoxjs_device_once_gemini.js)或者[autoxjs_device_gemini.js](https://github.com/GoingScience/sleepy/blob/main/client/autoxjs_device_gemini.js)（就我来说更推荐后者了）使用教程参考这两个文件的头部啦！
+- 导入[autoxjs_device_once_gemini.js](https://github.com/sleepy-project/sleepy/blob/main/client/autoxjs_device_once_gemini.js)或者[autoxjs_device_gemini.js](https://github.com/sleepy-project/sleepy/blob/main/client/autoxjs_device_gemini.js)（就我来说更推荐后者了）使用教程参考这两个文件的头部啦！
 
 ### 安卓低版本运行
 
